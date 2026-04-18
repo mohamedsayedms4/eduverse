@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=eduverse;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: YOUR_DB_PASSWORD
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eduverse:
+  cloudflare:
+    token: YOUR_CLOUDFLARE_API_TOKEN
+    zone-id: YOUR_ZONE_ID
+    root-domain: mobily.cloud
+    proxied: true
