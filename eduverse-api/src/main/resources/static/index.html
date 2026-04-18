@@ -23,14 +23,36 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1>Transform Your Teaching Experience</h1>
-                <p>Eduverse gives every teacher a professional, isolated platform to manage students, courses, and payments in one place.</p>
-                <div class="hero-actions">
-                    <a href="/register.html" class="btn btn-primary">Get Started as a Teacher</a>
+                <span style="background: #eff6ff; color: var(--primary); padding: 0.5rem 1rem; border-radius: 2rem; font-weight: 600; font-size: 0.875rem; margin-bottom: 1.5rem; display: inline-block;">Beta v1.0 is Live</span>
+                <h1>Transform Your <span style="color: var(--primary);">Teaching</span> Experience</h1>
+                <p>Eduverse provides every educator with an isolated, secure platform to manage students, assistants, and payments — all under your own brand.</p>
+                <div class="hero-actions" style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <a href="/register.html" class="btn btn-primary">Start Your Free Trial</a>
+                    <a href="/login.html" class="btn" style="background: #e2e8f0; color: var(--text);">Manage Platform</a>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="/hero.png" alt="Education Illustration">
+                <div style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); width: 100%; height: 400px; border-radius: 2rem; display: flex; items-center; justify-content: center; color: white;">
+                    <div style="text-align: center; padding: 2rem;">
+                        <h2 style="font-size: 3rem; margin-top: 4rem;">Eduverse</h2>
+                        <p style="color: rgba(255,255,255,0.8);">Next Gen Education Platform</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" style="max-width: 1200px; margin: 4rem auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+            <div class="feature-card" style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Multi-Tenant</h3>
+                <p style="color: var(--secondary);">Dedicated subdomain and isolated database schema for 100% data safety.</p>
+            </div>
+            <div class="feature-card" style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Role-Based Access</h3>
+                <p style="color: var(--secondary);">Manage Admins, Teachers, Assistants, Students, and Parents with ease.</p>
+            </div>
+            <div class="feature-card" style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Secure JWT</h3>
+                <p style="color: var(--secondary);">Industry-standard security with double token (Access/Refresh) protection.</p>
             </div>
         </section>
     </main>

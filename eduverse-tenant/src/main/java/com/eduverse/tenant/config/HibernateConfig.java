@@ -19,6 +19,7 @@ public class HibernateConfig {
         return hibernateProperties -> {
             hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProvider);
             hibernateProperties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, tenantIdentifierResolver);
+            hibernateProperties.put(AvailableSettings.STATEMENT_INSPECTOR, new com.eduverse.tenant.hibernate.SqlserverTenantInterceptor());
         };
     }
 }

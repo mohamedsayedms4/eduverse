@@ -22,8 +22,7 @@ public class TenantFilter implements Filter {
             throws IOException, ServletException {
         
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        String host = httpRequest.getHeader("Host");
-        String tenantId = extractTenantId(host);
+        String tenantId = resolveTenantId(httpRequest);
 
         try {
             TenantContext.setCurrentTenant(tenantId);
@@ -33,16 +32,26 @@ public class TenantFilter implements Filter {
         }
     }
 
-    private String extractTenantId(String host) {
-        if (host == null || host.isEmpty()) {
-            return DEFAULT_TENANT;
+    private String resolveTenantId(HttpServletRequest request) {
+        // 1. Check Header (High priority for API calls)
+        String tenantId = request.getHeader("X-TenantID");
+        if (tenantId != null && !tenantId.isEmpty()) {
+            return tenantId;
         }
 
-        // Host example: teacher1.eduverse.com
-        String[] parts = host.split("\\.");
-        if (parts.length > 2) {
-            // Return the first part as tenant (subdomain)
-            return parts[0];
+        // 2. Check Query Parameter (Good for simple testing)
+        tenantId = request.getParameter("tenant");
+        if (tenantId != null && !tenantId.isEmpty()) {
+            return tenantId;
+        }
+
+        // 3. Check Subdomain (Standard for Production)
+        String host = request.getHeader("Host");
+        if (host != null && !host.isEmpty()) {
+            String[] parts = host.split("\\.");
+            if (parts.length > 2) {
+                return parts[0];
+            }
         }
         
         return DEFAULT_TENANT;

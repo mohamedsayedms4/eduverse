@@ -1,5 +1,6 @@
 package com.eduverse.tenant.hibernate;
 
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.springframework.stereotype.Component;
 
@@ -7,6 +8,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+@Slf4j
 @Component
 public class MultiTenantConnectionProviderImpl implements MultiTenantConnectionProvider<String> {
 
@@ -28,11 +30,9 @@ public class MultiTenantConnectionProviderImpl implements MultiTenantConnectionP
 
     @Override
     public Connection getConnection(String tenantIdentifier) throws SQLException {
-        final Connection connection = getAnyConnection();
-        // SQL Server does not have a simple "SET SCHEMA" command.
-        // We will handle schema isolation via a StatementInspector or by qualifying table names.
-        // For now, we return the connection as is.
-        return connection;
+        // We now handle schema isolation via SqlserverTenantInterceptor (StatementInspector)
+        // by qualifying table names in the SQL. This is the most robust way for SQL Server.
+        return getAnyConnection();
     }
 
     @Override

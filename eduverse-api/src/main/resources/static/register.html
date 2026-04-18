@@ -23,18 +23,42 @@
             <p style="margin-bottom: 2rem; color: var(--secondary);">Setup your professional school in seconds.</p>
             
             <form id="registerForm">
-                <div class="form-group">
-                    <label for="name">School Name</label>
-                    <input type="text" id="name" name="name" placeholder="e.g. Bright Future Academy" required>
-                </div>
-                <div class="form-group">
-                    <label for="tenantId">Professional Subdomain</label>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <input type="text" id="tenantId" name="tenantId" placeholder="e.g. brightfuture" required>
-                        <span style="font-weight: 600; color: var(--secondary);">.eduverse.com</span>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="name">School Name</label>
+                        <input type="text" id="name" name="name" placeholder="Greenwood Academy" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenantId">School ID (Subdomain)</label>
+                        <input type="text" id="tenantId" name="tenantId" placeholder="greenwood" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create My Platform</button>
+
+                <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #e2e8f0;">
+                <p style="font-weight: 600; margin-bottom: 1rem; color: var(--primary);">Initial Teacher Account</p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Admin Email (Login ID)</label>
+                    <input type="email" id="email" name="email" placeholder="admin@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Launch School Platform</button>
             </form>
             <div id="status" style="margin-top: 1rem; text-align: center; display: none;"></div>
         </div>

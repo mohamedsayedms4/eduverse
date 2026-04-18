@@ -22,6 +22,9 @@ public class Tenant extends BaseEntity {
     @Column(nullable = false)
     private String dbSchema;
 
+    @Column(nullable = false, unique = true)
+    private String adminEmail;
+
     @Column(nullable = false)
     private boolean active = true;
 }

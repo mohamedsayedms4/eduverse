@@ -16,7 +16,12 @@ public class RegistrationController {
     private final TenantService tenantService;
 
     @PostMapping
-    public Tenant register(@RequestParam String tenantId, @RequestParam String name) {
-        return tenantService.registerTenant(tenantId, name);
+    public Tenant register(@RequestParam String tenantId, 
+                           @RequestParam String name,
+                           @RequestParam String firstName,
+                           @RequestParam String lastName,
+                           @RequestParam String email,
+                           @RequestParam String password) {
+        return tenantService.registerTenant(tenantId, name, firstName, lastName, email, password);
     }
 }
