@@ -53,9 +53,17 @@ public class TenantFilter implements Filter {
         // 3. Check Subdomain (Standard for Production)
         String host = request.getHeader("Host");
         if (host != null && !host.isEmpty()) {
-            String[] parts = host.split("\\.");
-            if (parts.length > 2) {
-                return parts[0];
+            // Remove port if present
+            String hostname = host.split(":")[0];
+            
+            // Regex to check if hostname is an IP address
+            boolean isIP = hostname.matches("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$");
+            
+            if (!isIP) {
+                String[] parts = hostname.split("\\.");
+                if (parts.length > 2) {
+                    return parts[0];
+                }
             }
         }
         

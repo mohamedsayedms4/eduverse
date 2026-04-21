@@ -154,7 +154,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let tenantId = new URLSearchParams(window.location.search).get('tenant');
             if (!tenantId) {
                 const hostname = window.location.hostname;
-                if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+                // Check if hostname is NOT an IP address and has subdomains
+                const isIP = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/.test(hostname);
+                if (!isIP && hostname !== 'localhost' && hostname !== '127.0.0.1') {
                     const parts = hostname.split('.');
                     if (parts.length >= 3) tenantId = parts[0];
                     else if (parts.length === 2 && parts[1] === 'localhost') tenantId = parts[0];
