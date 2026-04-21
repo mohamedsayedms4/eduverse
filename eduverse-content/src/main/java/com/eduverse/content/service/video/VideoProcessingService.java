@@ -36,10 +36,11 @@ public class VideoProcessingService {
      * Save the uploaded file to disk and return the output directory path
      */
     public Path saveUploadedFile(MultipartFile file, String tenantId, Long lessonId) throws Exception {
-        Path outputDir = Paths.get(storagePath, tenantId, String.valueOf(lessonId));
+        Path outputDir = Paths.get(storagePath, tenantId, String.valueOf(lessonId)).toAbsolutePath();
         Files.createDirectories(outputDir);
 
         Path originalFile = outputDir.resolve("original.mp4");
+        log.info("Saving uploaded video to: {}", originalFile);
         Files.copy(file.getInputStream(), originalFile, StandardCopyOption.REPLACE_EXISTING);
 
         log.info("Saved uploaded video to: {}", originalFile);
