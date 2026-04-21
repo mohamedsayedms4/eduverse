@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إنشاء منصة تعليمية - إدوفيرس</title>
+    <title>تسجيل طالب جديد - إدوفيرس</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -13,36 +13,35 @@
     <div class="auth-card" style="max-width: 520px;">
         <div class="logo-area">
             <h1>Eduverse</h1>
-            <p>أنشئ منصتك التعليمية مجاناً في دقائق</p>
+            <p>انضم كطالب إلى منصة معلمك التعليمية</p>
         </div>
 
         <div id="status"></div>
 
-        <form id="registerForm">
+        <form id="studentRegisterForm">
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">الاسم الأول</label>
-                    <input type="text" name="firstName" class="form-control" placeholder="محمد" required>
+                    <input type="text" name="firstName" class="form-control" placeholder="أحمد" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">اسم العائلة</label>
-                    <input type="text" name="lastName" class="form-control" placeholder="أحمد" required>
+                    <input type="text" name="lastName" class="form-control" placeholder="محمد" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="form-label">البريد الإلكتروني</label>
-                <input type="email" name="email" class="form-control" placeholder="example@mail.com" required>
+                <input type="email" name="email" class="form-control" placeholder="student@mail.com" required>
             </div>
             <div class="form-group">
                 <label class="form-label">كلمة المرور</label>
-                <input type="password" name="password" class="form-control" placeholder="كلمة مرور قوية" required>
+                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
             </div>
             <div class="form-group">
-                <label class="form-label">اسم المنصة (معرف فريد بالإنجليزية)</label>
-                <input type="text" name="tenantId" class="form-control" placeholder="my-school" pattern="[a-z0-9\-]+" required>
-                <small style="color: var(--gray-500); font-size: 0.8rem;">سيظهر كـ: my-school.eduverse.com</small>
+                <label class="form-label">معرف المنصة (اسأل معلمك)</label>
+                <input type="text" name="tenantId" class="form-control" placeholder="مثال: my-school" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">إنشاء المنصة الآن ←</button>
+            <button type="submit" class="btn btn-success btn-lg" style="width: 100%;">إنشاء حساب الطالب</button>
         </form>
 
         <div class="auth-footer">

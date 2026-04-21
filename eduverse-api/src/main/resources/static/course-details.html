@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الدورة - إدوفيرس</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container" style="max-width: 100%; padding: 0 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="القائمة">
+                    <span></span><span></span><span></span>
+                </button>
+                <a href="/" class="header-logo">Edu<span>verse</span></a>
+            </div>
+            <div class="header-user">
+                <span class="header-user-email" id="userEmail"></span>
+                <div class="user-avatar" id="userAvatar">م</div>
+                <button id="logoutBtn" class="btn btn-sm btn-outline" style="color: var(--danger); border-color: var(--danger-light);">خروج</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar" id="sidebar">
+            <span class="sidebar-label">القائمة الرئيسية</span>
+            <a href="/dashboard.html" class="sidebar-link">
+                <span class="icon">📊</span> لوحة التحكم
+            </a>
+            <a href="/courses.html" class="sidebar-link active">
+                <span class="icon">📚</span> الدورات التعليمية
+            </a>
+            <a href="/students.html" class="sidebar-link">
+                <span class="icon">👨‍🎓</span> إدارة الطلاب
+            </a>
+            <a href="/youtube-settings.html" class="sidebar-link">
+                <span class="icon">🎬</span> إعدادات الفيديو
+            </a>
+            <span class="sidebar-label" style="margin-top: 1rem;">النظام</span>
+            <a href="#" class="sidebar-link">
+                <span class="icon">⚙️</span> الإعدادات العامة
+            </a>
+        </aside>
+
+        <main class="main-content">
+            <!-- Breadcrumb -->
+            <div style="margin-bottom: 1.5rem;">
+                <a href="/courses.html" style="color: var(--primary); font-weight: 600; font-size: 0.9rem;">← العودة للدورات</a>
+            </div>
+
+            <!-- Course Header -->
+            <div class="card" style="margin-bottom: 2rem; border-right: 4px solid var(--primary);">
+                <div class="card-body">
+                    <h1 class="page-title" id="courseTitle" style="margin-bottom: 0.35rem;">جاري التحميل...</h1>
+                    <p id="courseDesc" style="color: var(--gray-600); font-size: 0.95rem;"></p>
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h2 style="font-size: 1.2rem; font-weight: 700;">الدروس والوحدات</h2>
+                <button id="showAddLesson" class="btn btn-primary btn-sm admin-only">+ إضافة درس جديد</button>
+            </div>
+
+            <div id="lessonList" class="lesson-list">
+                <p style="color: var(--gray-500); text-align: center; padding: 3rem;">جاري تحميل الدروس...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Lesson Modal -->
+    <div id="lessonModal" class="modal-backdrop">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>إضافة درس جديد</h3>
+                <button id="closeLessonModal" class="modal-close">✕</button>
+            </div>
+            <form id="lessonForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">عنوان الدرس</label>
+                        <input type="text" name="title" class="form-control" placeholder="مثال: مقدمة في الرياضيات" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">وصف الدرس (اختياري)</label>
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">ترتيب العرض</label>
+                        <input type="number" name="orderIndex" class="form-control" value="1" required>
+                    </div>
+
+                    <!-- Video Source -->
+                    <div class="form-group">
+                        <label class="form-label">مصدر الفيديو</label>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button type="button" id="selectYoutube" class="btn btn-primary btn-sm" style="flex: 1;" onclick="setVideoMode('youtube')">🎬 رابط يوتيوب</button>
+                            <button type="button" id="selectUpload" class="btn btn-outline btn-sm" style="flex: 1;" onclick="setVideoMode('upload')">📤 رفع على السيرفر</button>
+                        </div>
+                    </div>
+
+                    <!-- YouTube Mode -->
+                    <div id="youtubeModeSection" class="form-group">
+                        <label class="form-label">رابط يوتيوب</label>
+                        <input type="url" name="youtubeUrl" id="youtubeUrlInput" class="form-control" placeholder="https://youtube.com/watch?v=...">
+                    </div>
+
+                    <!-- Upload Mode -->
+                    <div id="uploadModeSection" class="form-group" style="display: none;">
+                        <label class="form-label">اختر ملف الفيديو</label>
+                        <div class="dropzone" id="dropzone">
+                            <div class="icon">📁</div>
+                            <p>اضغط هنا أو اسحب الملف لرفعه</p>
+                            <div class="hint">MP4, MOV, AVI — الحد الأقصى 500 ميجابايت</div>
+                            <input type="file" id="videoFileInput" accept="video/*" style="display: none;">
+                        </div>
+                        <div id="selectedFileName" style="margin-top: 0.75rem; color: var(--secondary); font-weight: 600; display: none; text-align: center; font-size: 0.9rem;"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" style="flex: 2;">حفظ الدرس</button>
+                    <button type="button" onclick="document.getElementById('lessonModal').classList.remove('show')" class="btn btn-outline" style="flex: 1;">إلغاء</button>
+                </div>
+            </form>
+
+            <!-- Upload Progress -->
+            <div class="upload-progress" id="uploadProgress" style="padding: 0 1.5rem 1.5rem;">
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="uploadProgressBar"></div>
+                </div>
+                <div class="upload-status" id="uploadStatusText">جاري الرفع...</div>
+                <div class="upload-status" id="uploadPercent" style="color: var(--primary); font-weight: 700;">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="/js/main.js?v=5"></script>
+    <script src="/js/content.js?v=5"></script>
+</body>
+</html>

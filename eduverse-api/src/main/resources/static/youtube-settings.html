@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعدادات الفيديو - إدوفيرس</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container" style="max-width: 100%; padding: 0 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="القائمة">
+                    <span></span><span></span><span></span>
+                </button>
+                <a href="/" class="header-logo">Edu<span>verse</span></a>
+            </div>
+            <div class="header-user">
+                <span class="header-user-email" id="userEmail"></span>
+                <div class="user-avatar" id="userAvatar">م</div>
+                <button id="logoutBtn" class="btn btn-sm btn-outline" style="color: var(--danger); border-color: var(--danger-light);">خروج</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar" id="sidebar">
+            <span class="sidebar-label">القائمة الرئيسية</span>
+            <a href="/dashboard.html" class="sidebar-link">
+                <span class="icon">📊</span> لوحة التحكم
+            </a>
+            <a href="/courses.html" class="sidebar-link">
+                <span class="icon">📚</span> الدورات التعليمية
+            </a>
+            <a href="/students.html" class="sidebar-link">
+                <span class="icon">👨‍🎓</span> إدارة الطلاب
+            </a>
+            <a href="/youtube-settings.html" class="sidebar-link active">
+                <span class="icon">🎬</span> إعدادات الفيديو
+            </a>
+            <span class="sidebar-label" style="margin-top: 1rem;">النظام</span>
+            <a href="#" class="sidebar-link">
+                <span class="icon">⚙️</span> الإعدادات العامة
+            </a>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">إعدادات بث الفيديو</h1>
+                    <p class="page-subtitle">ربط قناة يوتيوب أو استخدام مشغل إدوفيرس الآمن</p>
+                </div>
+            </div>
+
+            <div class="card" style="max-width: 700px; border-right: 4px solid #ff0000;">
+                <div class="card-body">
+                    <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;">
+                        <div style="width: 56px; height: 56px; border-radius: var(--radius-lg); background: var(--danger-light); display: flex; align-items: center; justify-content: center; font-size: 1.75rem; flex-shrink: 0;">🎬</div>
+                        <div>
+                            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem;">حالة الربط مع يوتيوب</h3>
+                            <p id="authStatus" style="color: var(--gray-600); font-size: 0.9rem;">جاري الكشف...</p>
+                        </div>
+                    </div>
+
+                    <div id="authActions">
+                        <button id="authBtn" class="btn btn-lg" style="background: #ff0000; color: #fff; border-color: #ff0000; display: none; width: 100%;">
+                            🎥 ربط حساب جوجل وقناة يوتيوب
+                        </button>
+
+                        <div id="connectedInfo" style="display: none; background: var(--secondary-light); padding: 1.5rem; border-radius: var(--radius-lg);">
+                            <p style="color: #0a7d58; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                ✅ حسابك مرتبط بنجاح!
+                            </p>
+                            <button id="disconnectBtn" class="btn btn-sm" style="background: var(--danger-light); color: var(--danger);">قطع الارتباط</button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);">
+                        <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.75rem;">لماذا أربط حساب يوتيوب؟</h4>
+                        <ul style="list-style: none; color: var(--gray-600); font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <li>• رفع الفيديوهات كـ "Unlisted" تلقائياً للحماية.</li>
+                            <li>• استخدام سيرفرات يوتيوب القوية مجاناً.</li>
+                            <li>• التحكم الكامل في خصوصية دروسك.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/main.js?v=5"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const authStatus = document.getElementById('authStatus');
+            const authBtn = document.getElementById('authBtn');
+            const connectedInfo = document.getElementById('connectedInfo');
+            const disconnectBtn = document.getElementById('disconnectBtn');
+
+            async function checkStatus() {
+                try {
+                    const response = await EduverseAuth.apiFetch('/youtube/status');
+                    const isAuth = await response.json();
+                    if (isAuth) {
+                        authStatus.textContent = 'حسابك مرتبط ومفعل حالياً.';
+                        authStatus.style.color = '#0a7d58';
+                        authBtn.style.display = 'none';
+                        connectedInfo.style.display = 'block';
+                    } else {
+                        authStatus.textContent = 'لم يتم ربط حساب يوتيوب بعد.';
+                        authStatus.style.color = 'var(--danger)';
+                        authBtn.style.display = 'block';
+                        connectedInfo.style.display = 'none';
+                    }
+                } catch (err) {
+                    authStatus.textContent = 'خطأ في الاتصال بالخادم.';
+                }
+            }
+
+            authBtn.onclick = async () => {
+                const response = await EduverseAuth.apiFetch('/youtube/auth-url');
+                const url = await response.text();
+                window.location.href = url;
+            };
+
+            disconnectBtn.onclick = async () => {
+                if (confirm('هل أنت متأكد من قطع الارتباط مع يوتيوب؟')) {
+                    await EduverseAuth.apiFetch('/youtube/revoke', { method: 'POST' });
+                    checkStatus();
+                }
+            };
+
+            checkStatus();
+        });
+    </script>
+</body>
+</html>

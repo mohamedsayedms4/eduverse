@@ -14,7 +14,7 @@ public class SqlserverTenantInterceptor implements StatementInspector {
         // Only transform if we have a real tenant and it's not the default public/dbo
         if (tenantId != null && !"public".equals(tenantId) && !"dbo".equals(tenantId)) {
             // Qualify the core tables using regex to handle word boundaries safely
-            String transformedSql = sql.replaceAll("\\b(users|refresh_tokens)\\b", "[" + tenantId + "].$1");
+            String transformedSql = sql.replaceAll("\\b(users|refresh_tokens|courses|lessons)\\b", "[" + tenantId + "].$1");
             
             if (!sql.equals(transformedSql)) {
                 log.debug("Transformed SQL for tenant {}: {}", tenantId, transformedSql);

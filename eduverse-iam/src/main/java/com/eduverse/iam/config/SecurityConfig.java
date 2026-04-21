@@ -27,10 +27,12 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/index.html", "/register.html", "/login.html", "/dashboard.html", "/css/**", "/js/**", "/*.png").permitAll()
+                .requestMatchers("/", "/index.html", "/register.html", "/login.html", "/dashboard.html", "/courses.html", "/course-details.html", "/youtube-settings.html", "/students.html", "/student-signup.html", "/css/**", "/js/**", "/*.png", "/favicon.ico", "/error").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/register/**").permitAll() // Tenant registration remains public
+                .requestMatchers("/api/register/**").permitAll()
                 .requestMatchers("/api/test/**").permitAll()
+                .requestMatchers("/api/courses", "/api/courses/**", "/api/lessons", "/api/lessons/**").permitAll()
+                .requestMatchers("/api/videos/**").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session

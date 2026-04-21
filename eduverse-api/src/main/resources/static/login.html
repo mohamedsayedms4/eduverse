@@ -1,49 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Eduverse</title>
+    <title>تسجيل الدخول - إدوفيرس</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="/" class="logo">EDUVERSE</a>
-            <div class="nav-links">
-                <a href="/register.html" class="btn btn-primary">Try for Free</a>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <div class="form-card">
-            <h2>Welcome Back</h2>
-            <p style="margin-bottom: 2rem; color: var(--secondary);">Sign in to manage your school.</p>
-            
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="admin@eduverse.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Sign In</button>
-            </form>
-
-            <div id="status" style="margin-top: 1.5rem; text-align: center; display: none;"></div>
-
-            <div class="form-footer">
-                <p>Don't have a platform yet? <a href="/register.html">Get started</a></p>
-            </div>
+<body class="auth-page">
+    <div class="auth-card">
+        <div class="logo-area">
+            <h1>Eduverse</h1>
+            <p>سجّل دخولك للوصول إلى منصتك التعليمية</p>
         </div>
-    </main>
 
-    <script src="/js/main.js"></script>
+        <div id="status"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label">البريد الإلكتروني</label>
+                <input type="email" id="email" class="form-control" placeholder="example@mail.com" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">كلمة المرور</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">تسجيل الدخول</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>ليس لديك حساب؟ <a href="/register.html">أنشئ منصتك الآن</a></p>
+            <p style="margin-top: 0.5rem;"><a href="/student-signup.html">تسجيل كطالب</a></p>
+        </div>
+    </div>
+
+    <script src="/js/main.js?v=5"></script>
 </body>
 </html>

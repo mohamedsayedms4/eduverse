@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الطلاب - إدوفيرس</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container" style="max-width: 100%; padding: 0 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="القائمة">
+                    <span></span><span></span><span></span>
+                </button>
+                <a href="/" class="header-logo">Edu<span>verse</span></a>
+            </div>
+            <div class="header-user">
+                <span class="header-user-email" id="userEmail"></span>
+                <div class="user-avatar" id="userAvatar">م</div>
+                <button id="logoutBtn" class="btn btn-sm btn-outline" style="color: var(--danger); border-color: var(--danger-light);">خروج</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar" id="sidebar">
+            <span class="sidebar-label">القائمة الرئيسية</span>
+            <a href="/dashboard.html" class="sidebar-link">
+                <span class="icon">📊</span> لوحة التحكم
+            </a>
+            <a href="/courses.html" class="sidebar-link">
+                <span class="icon">📚</span> الدورات التعليمية
+            </a>
+            <a href="/students.html" class="sidebar-link active">
+                <span class="icon">👨‍🎓</span> إدارة الطلاب
+            </a>
+            <a href="/youtube-settings.html" class="sidebar-link">
+                <span class="icon">🎬</span> إعدادات الفيديو
+            </a>
+            <span class="sidebar-label" style="margin-top: 1rem;">النظام</span>
+            <a href="#" class="sidebar-link">
+                <span class="icon">⚙️</span> الإعدادات العامة
+            </a>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">إدارة الطلاب</h1>
+                    <p class="page-subtitle">عرض وإدارة الطلاب المسجلين في منصتك</p>
+                </div>
+                <button id="showAddStudent" class="btn btn-primary btn-sm">+ إضافة طالب</button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>الاسم</th>
+                            <th>البريد الإلكتروني</th>
+                            <th>تاريخ الانضمام</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <tr><td colspan="5" style="text-align: center; padding: 3rem; color: var(--gray-500);">جاري تحميل قائمة الطلاب...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div id="studentModal" class="modal-backdrop">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>إضافة طالب جديد</h3>
+                <button id="closeStudentModal" class="modal-close">✕</button>
+            </div>
+            <form id="studentForm">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">الاسم الأول</label>
+                            <input type="text" name="firstName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">اسم العائلة</label>
+                            <input type="text" name="lastName" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">البريد الإلكتروني</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">كلمة المرور</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">إضافة الطالب</button>
+                    <button type="button" id="cancelStudentModal" class="btn btn-outline" style="flex: 1;">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/main.js?v=5"></script>
+    <script>
+        async function loadStudents() {
+            const tableBody = document.getElementById('studentTableBody');
+            try {
+                const response = await EduverseAuth.apiFetch('/users');
+                const users = await response.json();
+                const students = users.filter(u => u.role === 'STUDENT');
+
+                if (students.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 3rem; color: var(--gray-500);">لا يوجد طلاب مسجلين بعد.</td></tr>';
+                    return;
+                }
+
+                tableBody.innerHTML = students.map(s => `
+                    <tr>
+                        <td style="font-weight: 600;">${s.firstName} ${s.lastName}</td>
+                        <td>${s.email}</td>
+                        <td>${s.createdAt ? new Date(s.createdAt).toLocaleDateString('ar-EG') : '—'}</td>
+                        <td><span class="badge badge-success">نشط</span></td>
+                        <td>
+                            <button onclick="deleteStudent(${s.id})" class="btn btn-sm" style="background: var(--danger-light); color: var(--danger);">حذف</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 3rem; color: var(--danger);">فشل تحميل الطلاب.</td></tr>';
+            }
+        }
+
+        window.deleteStudent = async (id) => {
+            if (confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
+                await EduverseAuth.apiFetch(`/admin/users/${id}`, { method: 'DELETE' });
+                loadStudents();
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('studentModal');
+            const closeBtn = document.getElementById('closeStudentModal');
+            const cancelBtn = document.getElementById('cancelStudentModal');
+
+            document.getElementById('showAddStudent').onclick = () => modal.classList.add('show');
+            closeBtn.onclick = () => modal.classList.remove('show');
+            cancelBtn.onclick = () => modal.classList.remove('show');
+
+            document.getElementById('studentForm').onsubmit = async (e) => {
+                e.preventDefault();
+                const data = Object.fromEntries(new FormData(e.target));
+                data.role = 'STUDENT';
+                data.tenantId = localStorage.getItem('tenantId');
+
+                const response = await EduverseAuth.apiFetch('/users', {
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    modal.classList.remove('show');
+                    e.target.reset();
+                    loadStudents();
+                } else {
+                    alert('فشل إضافة الطالب.');
+                }
+            };
+
+            loadStudents();
+        });
+    </script>
+</body>
+</html>

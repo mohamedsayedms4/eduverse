@@ -19,6 +19,7 @@
         <module>eduverse-common</module>
         <module>eduverse-tenant</module>
         <module>eduverse-iam</module>
+        <module>eduverse-content</module>
         <module>eduverse-api</module>
     </modules>
 
@@ -41,6 +42,11 @@
             <dependency>
                 <groupId>com.eduverse</groupId>
                 <artifactId>eduverse-iam</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.eduverse</groupId>
+                <artifactId>eduverse-content</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

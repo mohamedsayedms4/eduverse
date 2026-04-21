@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدورات التعليمية - إدوفيرس</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container" style="max-width: 100%; padding: 0 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="القائمة">
+                    <span></span><span></span><span></span>
+                </button>
+                <a href="/" class="header-logo">Edu<span>verse</span></a>
+            </div>
+            <div class="header-user">
+                <span class="header-user-email" id="userEmail"></span>
+                <div class="user-avatar" id="userAvatar">م</div>
+                <button id="logoutBtn" class="btn btn-sm btn-outline" style="color: var(--danger); border-color: var(--danger-light);">خروج</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar" id="sidebar">
+            <span class="sidebar-label">القائمة الرئيسية</span>
+            <a href="/dashboard.html" class="sidebar-link">
+                <span class="icon">📊</span> لوحة التحكم
+            </a>
+            <a href="/courses.html" class="sidebar-link active">
+                <span class="icon">📚</span> الدورات التعليمية
+            </a>
+            <a href="/students.html" class="sidebar-link">
+                <span class="icon">👨‍🎓</span> إدارة الطلاب
+            </a>
+            <a href="/youtube-settings.html" class="sidebar-link">
+                <span class="icon">🎬</span> إعدادات الفيديو
+            </a>
+            <span class="sidebar-label" style="margin-top: 1rem;">النظام</span>
+            <a href="#" class="sidebar-link">
+                <span class="icon">⚙️</span> الإعدادات العامة
+            </a>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">الدورات التعليمية</h1>
+                    <p class="page-subtitle">إدارة المحتوى التعليمي الخاص بك</p>
+                </div>
+                <button id="showAddCourse" class="btn btn-primary admin-only">+ إنشاء دورة جديدة</button>
+            </div>
+
+            <div id="courseList" class="courses-grid">
+                <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">
+                    <p style="color: var(--gray-500); font-size: 1.1rem;">جاري تحميل الدورات...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Course Modal -->
+    <div id="courseModal" class="modal-backdrop">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>إنشاء دورة تعليمية جديدة</h3>
+                <button id="closeCourseModal" class="modal-close">✕</button>
+            </div>
+            <form id="courseForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">عنوان الدورة</label>
+                        <input type="text" name="title" class="form-control" placeholder="مثال: الرياضيات المتقدمة" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">وصف الدورة</label>
+                        <textarea name="description" class="form-control" placeholder="ماذا سيتعلم الطالب في هذه الدورة؟"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">رابط صورة الغلاف (اختياري)</label>
+                        <input type="url" name="thumbnailUrl" class="form-control" placeholder="https://example.com/image.jpg">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" style="flex: 2;">إنشاء الدورة</button>
+                    <button type="button" onclick="document.getElementById('courseModal').classList.remove('show')" class="btn btn-outline" style="flex: 1;">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/main.js?v=5"></script>
+    <script src="/js/content.js?v=5"></script>
+</body>
+</html>

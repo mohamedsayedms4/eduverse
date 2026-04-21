@@ -1,62 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eduverse - Professional Teaching Platform</title>
+    <title>إدوفيرس - منصة احترافية لإدارة العملية التعليمية</title>
+    <meta name="description" content="إدوفيرس توفر لكل معلم منصة آمنة ومستقلة لإدارة الطلاب، الدروس، والمدفوعات تحت هويتك التجارية الخاصة.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/" class="logo">EDUVERSE</a>
-            <div class="nav-links">
-                <a href="/login.html" class="btn">Login</a>
-                <a href="/register.html" class="btn btn-primary">Try for Free</a>
-            </div>
-        </nav>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="header-logo">
+                Edu<span>verse</span>
+            </a>
+            <nav class="header-nav">
+                <a href="/login.html" class="btn btn-ghost">تسجيل الدخول</a>
+                <a href="/register.html" class="btn btn-primary">ابدأ مجاناً</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
             <div class="hero-content">
-                <span style="background: #eff6ff; color: var(--primary); padding: 0.5rem 1rem; border-radius: 2rem; font-weight: 600; font-size: 0.875rem; margin-bottom: 1.5rem; display: inline-block;">Beta v1.0 is Live</span>
-                <h1>Transform Your <span style="color: var(--primary);">Teaching</span> Experience</h1>
-                <p>Eduverse provides every educator with an isolated, secure platform to manage students, assistants, and payments — all under your own brand.</p>
-                <div class="hero-actions" style="display: flex; gap: 1rem; margin-top: 2rem;">
-                    <a href="/register.html" class="btn btn-primary">Start Your Free Trial</a>
-                    <a href="/login.html" class="btn" style="background: #e2e8f0; color: var(--text);">Manage Platform</a>
+                <div class="hero-badge">🚀 النسخة التجريبية 1.0 متاحة الآن</div>
+                <h1 class="hero-title">
+                    حوّل تجربتك
+                    <span class="highlight">التعليمية</span>
+                    إلى مستوى احترافي
+                </h1>
+                <p class="hero-desc">
+                    إدوفيرس توفر لكل معلم منصة آمنة ومستقلة لإدارة الطلاب، الدروس، والمدفوعات — كل ذلك تحت هويتك التجارية الخاصة.
+                </p>
+                <div class="hero-actions">
+                    <a href="/register.html" class="btn btn-primary btn-lg">ابدأ تجربتك المجانية ←</a>
+                    <a href="/login.html" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.3); color: #fff;">إدارة المنصة</a>
                 </div>
-            </div>
-            <div class="hero-image">
-                <div style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); width: 100%; height: 400px; border-radius: 2rem; display: flex; items-center; justify-content: center; color: white;">
-                    <div style="text-align: center; padding: 2rem;">
-                        <h2 style="font-size: 3rem; margin-top: 4rem;">Eduverse</h2>
-                        <p style="color: rgba(255,255,255,0.8);">Next Gen Education Platform</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="number">500+</div>
+                        <div class="label">معلم مسجل</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="number">12K+</div>
+                        <div class="label">طالب نشط</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="number">3K+</div>
+                        <div class="label">درس تعليمي</div>
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="hero-visual">
+                <div class="hero-illustration">
+                    <div class="inner-text">
+                        <h2>إدوفيرس</h2>
+                        <p>الجيل القادم من منصات التعليم</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section class="features" style="max-width: 1200px; margin: 4rem auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
-            <div class="feature-card" style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
-                <h3 style="margin-bottom: 1rem; color: var(--primary);">Multi-Tenant</h3>
-                <p style="color: var(--secondary);">Dedicated subdomain and isolated database schema for 100% data safety.</p>
+    <!-- Features -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>لماذا إدوفيرس؟</h2>
+                <p>كل ما تحتاجه لبناء منصتك التعليمية الاحترافية في مكان واحد</p>
             </div>
-            <div class="feature-card" style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
-                <h3 style="margin-bottom: 1rem; color: var(--primary);">Role-Based Access</h3>
-                <p style="color: var(--secondary);">Manage Admins, Teachers, Assistants, Students, and Parents with ease.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: var(--primary-light); color: var(--primary);">🏗️</div>
+                    <h3>منصة مستقلة (Multi-Tenant)</h3>
+                    <p>نطاق فرعي خاص وقاعدة بيانات معزولة لضمان أمان بياناتك بنسبة 100%.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: var(--secondary-light); color: var(--secondary);">🛡️</div>
+                    <h3>صلاحيات متقدمة</h3>
+                    <p>إدارة المسؤولين، المعلمين، المساعدين، والطلاب بسهولة عبر نظام أدوار متكامل.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background: var(--accent-light); color: var(--accent);">🎬</div>
+                    <h3>بث فيديو محمي</h3>
+                    <p>رفع الفيديوهات ومعالجتها ذاتياً مع حماية كاملة ضد التحميل وتصوير الشاشة.</p>
+                </div>
             </div>
-            <div class="feature-card" style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
-                <h3 style="margin-bottom: 1rem; color: var(--primary);">Secure JWT</h3>
-                <p style="color: var(--secondary);">Industry-standard security with double token (Access/Refresh) protection.</p>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <script src="/js/main.js"></script>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 <a href="/">Eduverse</a> — منصة تعليمية احترافية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js?v=5"></script>
 </body>
 </html>

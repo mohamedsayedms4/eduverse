@@ -23,6 +23,11 @@ public class TenantFilter implements Filter {
         
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String tenantId = resolveTenantId(httpRequest);
+        
+        if (httpRequest.getRequestURI().contains("/api/")) {
+            log.debug("DEBUG: Request {} - Header X-TenantID: {}, Resolved Tenant: {}", 
+                     httpRequest.getRequestURI(), httpRequest.getHeader("X-TenantID"), tenantId);
+        }
 
         try {
             TenantContext.setCurrentTenant(tenantId);

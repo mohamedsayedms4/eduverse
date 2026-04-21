@@ -59,6 +59,23 @@ public class AuthController {
         return ResponseEntity.ok(authService.register(user));
     }
 
+    @PostMapping("/student-register")
+    public ResponseEntity<User> studentRegister(@RequestBody RegisterRequest request) {
+        return tenantService.findTenantById(request.getTenantId()).map(tenant -> {
+            com.eduverse.tenant.context.TenantContext.setCurrentTenant(tenant.getTenantId());
+            
+            User user = new User();
+            user.setFirstName(request.getFirstName());
+            user.setLastName(request.getLastName());
+            user.setEmail(request.getEmail());
+            user.setPassword(request.getPassword());
+            user.setRole(com.eduverse.common.enums.Role.STUDENT);
+            user.setTenantId(tenant.getTenantId());
+            
+            return ResponseEntity.ok(authService.register(user));
+        }).orElseThrow(() -> new RuntimeException("Invalid or missing tenant invite link"));
+    }
+
     @PostMapping("/refresh")
     public ResponseEntity<AuthResponse> refresh(@RequestBody RefreshRequest request) {
         return authService.findByToken(request.getRefreshToken())

@@ -25,5 +25,8 @@ public class Teacher extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String tenantId;
+
     private boolean active = true;
 }
